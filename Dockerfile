@@ -9,12 +9,9 @@ RUN apt-get update; \
     wkhtmltopdf \
     git \
     build-essential \
-    postgresql-common \
+    postgresql-client-11 \
 	  libsasl2-dev libldap2-dev libssl-dev libpq-dev libjpeg-dev zlib1g-dev libxml2-dev libxslt-dev \
-    python3-dev python3-pip
-
-# Mount /var/lib/odoo to allow restoring filestore
-VOLUME ["/var/lib/odoo"]
+    python3-pip
 
 # Create the odoo user
 RUN useradd --create-home --home-dir /opt/odoo --no-log-init odoo
@@ -47,13 +44,21 @@ RUN echo "unidecode" >> oca-it/requirements.txt
 
 # Install dependencies
 ENV PATH="/opt/odoo/.local/bin:${PATH}"
-RUN pip install --upgrade pip \
- && pip install --upgrade setuptools \
- && pip install wheel \
- && pip install -r odoo-src/requirements.txt \
- && pip install -r oca9/requirements.txt \
- && pip install -r oca-it/requirements.txt
+RUN pip3 install --upgrade setuptools \
+ && pip3 install -r odoo-src/requirements.txt \
+ && pip3 install -r oca9/requirements.txt \
+ && pip3 install -r oca-it/requirements.txt
+
+# Mount odoo data_dir
+RUN mkdir -p /opt/odoo/volume/odoo_data_dir
+VOLUME ["/opt/odoo/volume"]
+
+RUN echo "[options]" >> /opt/odoo/.odoorc
+RUN echo "addons_path = /opt/odoo/odoo-src/addons,/opt/odoo/oca-it,/opt/odoo/oca1,/opt/odoo/oca2,/opt/odoo/oca3,/opt/odoo/oca4,/opt/odoo/oca5,/opt/odoo/oca6,/opt/odoo/oca7,/opt/odoo/oca8,/opt/odoo/oca9,/opt/odoo/oca10" >> /opt/odoo/.odoorc
+RUN echo "data_dir = /opt/odoo/volume/odoo_data_dir" >> /opt/odoo/.odoorc
+RUN echo "db_host = db" >> /opt/odoo/.odoorc
+RUN echo "db_user = odoo" >> /opt/odoo/.odoorc
+RUN echo "db_password = odoo" >> /opt/odoo/.odoorc
 
 EXPOSE 8069 8071
-CMD odoo-src/odoo-bin --db_host db -r odoo -w odoo \
-    --addons-path "odoo-src/addons,oca-it,oca1,oca2,oca3,oca4,oca5,oca6,oca7,oca8,oca9,oca10"
+CMD odoo-src/odoo-bin

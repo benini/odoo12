@@ -9,9 +9,9 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      - odoo-web-data:/var/lib/odoo
+      - odoo-web-data:/opt/odoo/volume
   db:
-    image: postgres:latest
+    image: postgres:11
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
