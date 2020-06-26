@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM debian:buster
 
 RUN apt-get update; \
     apt-get install -qq -y --no-install-recommends \
@@ -11,7 +11,7 @@ RUN apt-get update; \
     build-essential \
     postgresql-client-11 \
 	  libsasl2-dev libldap2-dev libssl-dev libpq-dev libjpeg-dev zlib1g-dev libxml2-dev libxslt-dev \
-    python3-pip
+    python3.7-dev python3-pip
 
 # Create the odoo user
 RUN useradd --create-home --home-dir /opt/odoo --no-log-init odoo
@@ -45,6 +45,7 @@ RUN echo "unidecode" >> oca-it/requirements.txt
 # Install dependencies
 ENV PATH="/opt/odoo/.local/bin:${PATH}"
 RUN pip3 install --upgrade setuptools \
+ && pip3 install --upgrade wheel \
  && pip3 install -r odoo-src/requirements.txt \
  && pip3 install -r oca9/requirements.txt \
  && pip3 install -r oca-it/requirements.txt
