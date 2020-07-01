@@ -5,8 +5,9 @@ Crea un istanza di odoo-12 community (l'ultima versione con la contabilità grat
 Avviare con:
 sudo docker-compose up
 
-Rimuovere moduli sponsorizzati:
-unsplash
+Rimuovere moduli sponsorizzati:  
+unsplash  
+partner_autocomplete
 
 Per la contabilità italiana installare i moduli:  
 l10n_it_fatturapa_in_rc  
