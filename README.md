@@ -13,10 +13,11 @@ Per la contabilità italiana installare i moduli:
 l10n_it_fatturapa_in_rc  
 l10n_it_vat_registries_split_payment  
 l10n_it_vat_statement_split_payment  
-l10n_it_vat_statement_communication
+l10n_it_vat_statement_communication  
 l10n_it_account_balance_report  
 l10n_it_central_journal  
 l10n_it_ricevute_bancarie  
+account_payment_term_extension  
 account_bank_statement_import_txt_xlsx  
 
 In Administrator -> Preferenze disattivare l'OdooBot  
