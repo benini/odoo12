@@ -6,12 +6,15 @@ RUN apt-get update; \
     dirmngr \
     fonts-noto-cjk \
     node-less \
-    wkhtmltopdf \
+    wget \
     git \
     build-essential \
     postgresql-client-11 \
 	  libsasl2-dev libldap2-dev libssl-dev libpq-dev libjpeg-dev zlib1g-dev libxml2-dev libxslt-dev \
     python3.7-dev python3-pip
+
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb -O /tmp/wkhtml.deb
+RUN apt install -y /tmp/wkhtml.deb
 
 # Create the odoo user
 RUN useradd --create-home --home-dir /opt/odoo --no-log-init odoo
