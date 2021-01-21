@@ -24,9 +24,9 @@ WORKDIR /opt/odoo
 # Download source code
 ENV ODOO_VER 12.0
 RUN git clone --depth 1000 --branch ${ODOO_VER} https://github.com/odoo/odoo.git odoo-src \
-&& git --git-dir=odoo-src/.git checkout 790cde7cc466e62db03331ce00f310153d668077
+&& git --git-dir=odoo-src/.git reset --hard 790cde7cc466e62db03331ce00f310153d668077
 RUN git clone --depth 1000 --branch ${ODOO_VER} https://github.com/OCA/l10n-italy.git oca-it \
-&& git --git-dir=odoo-it/.git checkout `git rev-list -n 1 --first-parent --before=2020-06-20 HEAD`
+&& git --git-dir=oca-it/.git reset --hard `git --git-dir=oca-it/.git rev-list -n 1 --first-parent --before=2020-06-20 HEAD`
 RUN git clone --depth 1 --branch ${ODOO_VER} https://github.com/OCA/account-invoicing.git oca10
 RUN git clone --depth 1 --branch ${ODOO_VER} https://github.com/OCA/account-financial-tools.git oca1
 RUN git clone --depth 1 --branch ${ODOO_VER} https://github.com/OCA/account-financial-reporting.git oca2
@@ -41,6 +41,9 @@ RUN git clone --depth 1 --branch ${ODOO_VER} https://github.com/OCA/web oca11
 RUN git clone --depth 1 --branch ${ODOO_VER} https://github.com/OCA/bank-statement-import oca12
 
 RUN grep -iRn -A 8 external_dependencies .
+
+# Fix: matplotlib 3.3.3 has requirement pillow>=6.2.0, but you'll have pillow 6.1.0 which is incompatible.
+RUN sed -i "s/Pillow==6.1/Pillow==6.2/g" odoo-src/requirements.txt
 
 # Create requirements.txt for l10n-italy modules
 RUN echo "asn1crypto" >> oca-it/requirements.txt
