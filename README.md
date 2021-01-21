@@ -28,3 +28,10 @@ In Fatturazione -> Configurazione -> Imposte disattivare le aliquote non usate, 
 
 Backup:
 localhost:8069/web/database/manager
+
+Aggiornamenti:
+Eliminare i container: sudo docker system prune --all
+Modificare nel Dockerfile: CMD odoo-src/odoo-bin --update=all
+Avviare odoo ed aprire il database per aggiornarlo: sudo docker-compose up
+Togliere --update==all dal Dockerfile e ricostruire il container: sudo docker-compose build
+ 
