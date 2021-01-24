@@ -25,13 +25,13 @@ WORKDIR /opt/odoo
 ENV ODOO_VER 12.0
 RUN git clone --depth 1000 --branch ${ODOO_VER} https://github.com/odoo/odoo.git odoo-src \
 && cd odoo-src \
-&& git reset --hard `git rev-list -n 1 --first-parent --before=2020-11-01 HEAD` \
+&& git reset --hard `git rev-list -n 1 --first-parent --before=2020-07-08 HEAD` \
 && git clean -fdx && git log -n 1 \
 && cd ..
 
 RUN git clone --depth 1000 --branch ${ODOO_VER} https://github.com/OCA/l10n-italy.git oca-it \
 && cd oca-it \
-&& git reset --hard `git rev-list -n 1 --first-parent --before=2020-11-01 HEAD` \
+&& git reset --hard `git rev-list -n 1 --first-parent --before=2020-07-08 HEAD` \
 && git clean -qfdx && git log -n 1 \
 && cd ..
 
@@ -59,6 +59,7 @@ RUN echo "codicefiscale" >> oca-it/requirements.txt
 RUN echo "pyxb" >> oca-it/requirements.txt
 RUN echo "unicodecsv" >> oca-it/requirements.txt
 RUN echo "unidecode" >> oca-it/requirements.txt
+RUN echo "phonenumbers" >> oca-it/requirements.txt
 
 # Install dependencies
 ENV PATH="/opt/odoo/.local/bin:${PATH}"
