@@ -7,7 +7,7 @@ sudo docker-compose up
 
 Rimuovere moduli sponsorizzati:  
 unsplash  
-partner_autocomplete
+partner_autocomplete  
 mail_bot
 
 Per la contabilità italiana installare i moduli:  
@@ -22,10 +22,12 @@ account_payment_term_extension
 account_bank_statement_import_txt_xlsx  
 
 In Impostazioni -> "Attiva la modalità sviluppatore"  
-In Impostazioni -> "Gestisci i diritti di accesso" selezionare "Mostrare funzionalità contabili complete".  
-In Impostazioni -> "Funzioni tecniche" -> "Struttura database" -> "Accuratezza decimale" consentire 4 cifre per "Product Price".  
-In Impostazioni -> "Impostazioni Generali" -> "Contabilità" impostare lo stile formato di anteprima delle fatture elettroniche a "AssoSoftware".  
+In Impostazioni -> "Gestisci i diritti di accesso": selezionare "Mostrare funzionalità contabili complete".  
+In Impostazioni -> "Funzioni tecniche" -> "Struttura database" -> "Accuratezza decimale": consentire 4 cifre per "Product Price".  
+In Impostazioni -> "Impostazioni Generali" -> "Contabilità": impostare lo stile formato di anteprima delle fatture elettroniche a "AssoSoftware".  
 In Fatturazione -> Configurazione -> Imposte disattivare le aliquote non usate, aggiungere il conto per la liquidazione IVA, i codici N1 e N2.  
+In Fatturazione -> Configurazione -> "Registri": per ciascun registro si può abilitare "Consentire annullamento registrazioni" (annullare una fattura annulla anche il corrispondente movimento contabile e le relative riconciliazioni) e "Raggruppa le righe fattura" (le righe che hanno lo stesso prodotto, se presente, lo stesso conto e la stessa iva vengono sommati; la descrizione usata è quella della prima riga).  
+In Fatturazione -> Configurazione -> "Movimenti Contabili" è possibile (senza dover annullare il movimento) cambiare l'etichetta e la data di scadenza.  
 
 Backup:  
 localhost:8069/web/database/manager
