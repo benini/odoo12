@@ -20,6 +20,8 @@ l10n_it_central_journal
 l10n_it_ricevute_bancarie  
 account_payment_term_extension  
 account_bank_statement_import_txt_xlsx  
+account_cutoff_accrual_dates  
+account_fiscal_year_closing  
 
 In Impostazioni -> "Attiva la modalità sviluppatore"  
 In Impostazioni -> "Gestisci i diritti di accesso": selezionare "Mostrare funzionalità contabili complete".  
