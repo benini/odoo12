@@ -65,7 +65,7 @@ RUN echo "phonenumbers" >> oca-it/requirements.txt
 
 # Install dependencies
 ENV PATH="/opt/odoo/.local/bin:${PATH}"
-RUN pip3 install --upgrade setuptools \
+RUN pip3 install --upgrade "setuptools<58" \
  && pip3 install --upgrade wheel \
  && pip3 install -r odoo-src/requirements.txt \
  && pip3 install -r oca-it/requirements.txt \
